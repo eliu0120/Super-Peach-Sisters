@@ -48,23 +48,45 @@ Peach::Peach(int startX, int startY, StudentWorld* worldPtr) : Actor(IID_PEACH, 
 }
 
 void Peach::doSomething() {
+	if (!isAlive())
+		return;
+	int itr;
+	if (m_remaining_jump_distance > 0)
+		if (getWorldPtr()->collideWall(getX(), getY() + 4, itr)) {
+			getWorldPtr()->bonkActor(itr);
+			m_remaining_jump_distance = 0;
+		}
+		else {
+			moveTo(getX(), getY() + 4);
+			m_remaining_jump_distance--;
+		}
+	else if (!getWorldPtr()->collideWall(getX(), getY() - 4, itr))
+		moveTo(getX(), getY() - 4);
 	int ch;
 	if (getWorldPtr()->getKey(ch)) {
-		int itr;
 		switch (ch) {
 		case KEY_PRESS_LEFT:
 			setDirection(180);
-			if (getWorldPtr()->collideWall(getX() - 8, getY(), itr))
+			if (getWorldPtr()->collideWall(getX() - 4, getY(), itr))
 				getWorldPtr()->bonkActor(itr);
 			else
 				moveTo(getX() - 4, getY());
 			break;
 		case KEY_PRESS_RIGHT:
 			setDirection(0);
-			if (getWorldPtr()->collideWall(getX() + 8, getY(), itr))
+			if (getWorldPtr()->collideWall(getX() + 4, getY(), itr))
 				getWorldPtr()->bonkActor(itr);
 			else
 				moveTo(getX() + 4, getY());
+			break;
+		case KEY_PRESS_UP:
+			if (getWorldPtr()->collideWall(getX(), getY() - 4, itr)) {
+				if (!isJumpPower)
+					m_remaining_jump_distance = 8;
+				else
+					m_remaining_jump_distance = 12;
+				getWorldPtr()->playSound(SOUND_PLAYER_JUMP);
+			}
 			break;
 		default:
 			break;

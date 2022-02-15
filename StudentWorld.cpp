@@ -81,7 +81,7 @@ void StudentWorld::cleanUp() {
 
 bool StudentWorld::collideWall(double x, double y, int& itr) {
     for (int i = 1; i < m_actors.size(); i++) // Change to i = 2 later - flag/mario will become m_actors[1]
-        if (m_actors[i]->doesBlock() && m_actors[i]->getX() == x && m_actors[i]->getY() == y) {
+        if (m_actors[i]->doesBlock() && (x - 4 <= m_actors[i]->getX() && x + 4 >= m_actors[i]->getX()) && (y - 4 <= m_actors[i]->getY() && y + 4 >= m_actors[i]->getY())) {
             itr = i;
             return true;
         }
