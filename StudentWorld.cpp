@@ -68,11 +68,16 @@ int StudentWorld::move()
 {
     // This code is here merely to allow the game to build, run, and terminate after you hit enter.
     // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
-    for (int i = 0; i < m_actors.size(); i++) {
+    for (int i = 0; i < m_actors.size(); i++)
         if (m_actors[i]->isAlive()) {
             m_actors[i]->doSomething();
         }
-    }
+    for (int i = 0; i < m_actors.size(); i++)
+        if (!m_actors[i]->isAlive()) {
+            delete m_actors[i];
+            m_actors.erase(m_actors.begin() + i);
+            i--;
+        }
     return GWSTATUS_CONTINUE_GAME;
 }
 

@@ -39,6 +39,10 @@ bool Actor::isAlive() const {
 	return m_isAlive;
 }
 
+void Actor::kill() {
+	m_isAlive = false;
+}
+
 Actor::~Actor() {
 	// cerr << "Destructing!" << endl; // For testing purposes only
 }
@@ -157,6 +161,7 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 void PowerUp::doSomething() {
 	if (getWorldPtr()->overlapPeach(getX(), getY())) {
 		getWorldPtr()->playSound(SOUND_PLAYER_POWERUP);
+		kill();
 		return;
 	}
 	if (!getWorldPtr()->collideWall(getX(), getY() - 2, false))

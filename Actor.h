@@ -21,6 +21,7 @@ public:
 	virtual bool isEnemy() const;
 	virtual void dump() const;
 	bool isAlive() const;
+	void kill();
 	virtual ~Actor();
 
 protected:
