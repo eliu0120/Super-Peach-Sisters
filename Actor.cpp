@@ -133,17 +133,7 @@ void Block::bonk() {
 		getWorldPtr()->playSound(SOUND_PLAYER_BONK);
 	else {
 		getWorldPtr()->playSound(SOUND_POWERUP_APPEARS);
-		switch (m_goodie) {
-		case FLOWER:
-			getWorldPtr()->newPowerUp(FLOWER, getX(), getY() + 8);
-			break;
-		case MUSHROOM:
-			getWorldPtr()->newPowerUp(MUSHROOM, getX(), getY() + 8);
-			break;
-		case STAR:
-			getWorldPtr()->newPowerUp(STAR, getX(), getY() + 8);
-			break;
-		}
+		getWorldPtr()->newPowerUp(m_goodie, getX(), getY() + 8);
 		m_goodie = NO_GOODIE;
 	}
 	// cerr << "Bonk!" << endl; // Testing only

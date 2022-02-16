@@ -102,7 +102,7 @@ void StudentWorld::bonkActor(int itr) {
 }
 
 void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {
-    switch (powerUp) {
+    switch (powerUp) { // Are we allowed to identify different power ups like this?
     case FLOWER:
         m_actors.push_back(new Flower(startX, startY, this));
         break;
