@@ -63,6 +63,11 @@ Peach::Peach(int startX, int startY, StudentWorld* worldPtr) : Actor(IID_PEACH, 
 void Peach::doSomething() {
 	if (!isAlive())
 		return;
+	if (m_remaining_time_starPower > 0) {
+		m_remaining_time_starPower--;
+		if (m_remaining_time_starPower == 0)
+			setPower(false, STAR);
+	}
 	if (m_remaining_jump_distance > 0)
 		if (getWorldPtr()->collideWall(getX(), getY() + 4, true))
 			m_remaining_jump_distance = 0;
@@ -109,21 +114,33 @@ void Peach::setHP(int hp) {
 	m_hp = hp;
 }
 
+bool Peach::getStarPower() const {
+	return isStarPower;
+}
+
+bool Peach::getShootPower() const {
+	return isShootPower;
+}
+
+bool Peach::getJumpPower() const {
+	return isJumpPower;
+}
+
 void Peach::setPower(bool activated, int powerUp) {
 	switch (powerUp) {
 	case FLOWER:
 		isShootPower = activated;
-		cerr << "Shoot Power!" << endl; // Testing only
+		// cerr << "Shoot Power!" << endl; // Testing only
 		break;
 	case MUSHROOM:
 		isJumpPower = activated;
-		cerr << "Jump Power!" << endl; // Testing only
+		// cerr << "Jump Power!" << endl; // Testing only
 		break;
 	case STAR:
 		isStarPower = activated;
 		if (activated)
 			m_remaining_time_starPower = 150;
-		cerr << "Star power!" << endl; // Testing only
+		// cerr << "Star power!" << endl; // Testing only
 		break;
 	}
 }

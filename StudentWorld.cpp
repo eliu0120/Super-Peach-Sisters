@@ -3,6 +3,7 @@
 #include "Actor.h"
 #include <string>
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 GameWorld* createStudentWorld(string assetPath)
@@ -80,6 +81,16 @@ int StudentWorld::move()
             m_actors.erase(m_actors.begin() + i);
             i--;
         }
+    ostringstream oss;
+    oss << "Lives: " << getLives() << " Level: " << getLevel() << " Points: " << getScore();
+    if (m_peach->getShootPower())
+        oss << " ShootPower!";
+    if (m_peach->getJumpPower())
+        oss << " JumpPower!";
+    if (m_peach->getStarPower())
+        oss << " StarPower!";
+    string statText = oss.str();
+    setGameStatText(statText);
     return GWSTATUS_CONTINUE_GAME;
 }
 

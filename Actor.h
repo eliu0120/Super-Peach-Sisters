@@ -38,6 +38,9 @@ public:
 	virtual void doSomething();
 	virtual void bonk();
 	void setHP(int hp);
+	bool getStarPower() const;
+	bool getShootPower() const;
+	bool getJumpPower() const;
 	void setPower(bool activated, int powerUp);
 
 private:
