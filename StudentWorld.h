@@ -18,6 +18,7 @@ public:
 	virtual int move();
 	virtual void cleanUp();
 	bool collideWall(double x, double y, bool bonk);
+	bool overlapPeach(double x, double y);
 	void isOverlap(double x, double y, bool bonk);
 	void newPowerUp(int powerUp, int startX, int startY);
 	~StudentWorld();

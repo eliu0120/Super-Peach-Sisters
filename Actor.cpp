@@ -155,18 +155,22 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 }
 
 void PowerUp::doSomething() {
-	if (!getWorldPtr()->collideWall(getX(), getY() - 4, false))
+	if (getWorldPtr()->overlapPeach(getX(), getY())) {
+		getWorldPtr()->playSound(SOUND_PLAYER_POWERUP);
+		return;
+	}
+	if (!getWorldPtr()->collideWall(getX(), getY() - 2, false))
 		moveTo(getX(), getY() - 2);
 	switch (getDirection()) {
 	case left:
-		if (getWorldPtr()->collideWall(getX() - 4, getY(), false)) {
+		if (getWorldPtr()->collideWall(getX() - 2, getY(), false)) {
 			setDirection(right);
 			return;
 		} else
 			moveTo(getX() - 2, getY());
 		break;
 	case right:
-		if (getWorldPtr()->collideWall(getX() + 4, getY(), false)) {
+		if (getWorldPtr()->collideWall(getX() + 2, getY(), false)) {
 			setDirection(left);
 			return;
 		}
@@ -181,7 +185,7 @@ bool PowerUp::isDamageable() const {
 }
 
 void PowerUp::bonk() {
-	cerr << "Bonk!" << endl;
+	// cerr << "Bonk!" << endl; // For testing only
 	return;
 }
 

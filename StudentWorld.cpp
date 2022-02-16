@@ -90,7 +90,7 @@ void StudentWorld::cleanUp() {
 
 bool StudentWorld::collideWall(double x, double y, bool bonk) {
     for (int i = 1; i < m_actors.size(); i++) // Change to i = 2 later - flag/mario will become m_actors[1]
-        if (m_actors[i]->doesBlock() && (x - 4 <= m_actors[i]->getX() && x + 4 >= m_actors[i]->getX()) && (y - 4 <= m_actors[i]->getY() && y + 4 >= m_actors[i]->getY())) {
+        if (m_actors[i]->doesBlock() && (x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY())) {
             if (bonk)
                 m_actors[i]->bonk();
             return true;
@@ -98,9 +98,13 @@ bool StudentWorld::collideWall(double x, double y, bool bonk) {
     return false;
 }
 
+bool StudentWorld::overlapPeach(double x, double y) {
+    return (x - 7 <= m_actors[0]->getX() && x + 7 >= m_actors[0]->getX()) && (y - 7 <= m_actors[0]->getY() && y + 7 >= m_actors[0]->getY());
+}
+
 void StudentWorld::isOverlap(double x, double y, bool bonk) {
     for (int i = 1; i < m_actors.size(); i++) // Change to i = 2 later - flag/mario will become m_actors[1]
-        if ((x - 6 <= m_actors[i]->getX() && x + 6 >= m_actors[i]->getX()) && (y - 6 <= m_actors[i]->getY() && y + 6 >= m_actors[i]->getY()))
+        if ((x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY()))
             if (bonk)
                 m_actors[i]->bonk();
 }
