@@ -23,10 +23,6 @@ bool Actor::isDamageable() const {
 	return true;
 }
 
-bool Actor::isEnemy() const {
-	return false;
-}
-
 void Actor::dump() const { // Testing only
 	cerr << doesBlock() << " " << isDamageable() << endl;
 }
@@ -99,6 +95,11 @@ void Peach::doSomething() {
 					m_remaining_jump_distance = 12;
 				getWorldPtr()->playSound(SOUND_PLAYER_JUMP);
 			}
+			break;
+		case KEY_PRESS_SPACE:
+			if (!isShootPower || m_remaining_time_recharge > 0)
+				break;
+			getWorldPtr()->playSound(SOUND_PLAYER_FIRE);
 			break;
 		default:
 			break;
@@ -228,11 +229,6 @@ bool PowerUp::isDamageable() const {
 	return false;
 }
 
-void PowerUp::bonk() {
-	// cerr << "Bonk!" << endl; // For testing only
-	return;
-}
-
 // Flower class functions
 Flower::Flower(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_FLOWER, startX, startY, worldPtr) {
 
@@ -258,4 +254,21 @@ Star::Star(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_STAR, s
 
 int Star::getPowerUp() const {
 	return STAR;
+}
+
+// Projectile class functions
+Projectile::Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr) : Actor(imageID, startX, startY, worldPtr, 0, 1, 1.0) {
+
+}
+
+void Projectile::doSomething() {
+	return;
+}
+
+bool Projectile::isDamageable() {
+	return false;
+}
+
+void Projectile::damage() {
+	return;
 }

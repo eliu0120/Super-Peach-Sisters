@@ -18,7 +18,6 @@ public:
 	virtual void bonk();
 	virtual bool doesBlock() const;
 	virtual bool isDamageable() const;
-	virtual bool isEnemy() const;
 	virtual void dump() const;
 	bool isAlive() const;
 	void kill();
@@ -84,7 +83,7 @@ public:
 	PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr);
 	virtual void doSomething();
 	virtual bool isDamageable() const;
-	virtual void bonk();
+
 protected:
 	virtual int getPowerUp() const = 0;
 };
@@ -92,6 +91,7 @@ protected:
 class Flower : public PowerUp {
 public:
 	Flower(int startX, int startY, StudentWorld* worldPtr);
+
 protected:
 	virtual int getPowerUp() const;
 };
@@ -99,6 +99,7 @@ protected:
 class Mushroom : public PowerUp {
 public:
 	Mushroom(int startX, int startY, StudentWorld* worldPtr);
+
 protected:
 	virtual int getPowerUp() const;
 };
@@ -106,8 +107,19 @@ protected:
 class Star : public PowerUp {
 public:
 	Star(int startX, int startY, StudentWorld* worldPtr);
+
 protected:
 	virtual int getPowerUp() const;
+};
+
+class Projectile : public Actor {
+public:
+	Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr);
+	virtual void doSomething();
+	virtual bool isDamageable();
+	virtual ~Projectile() = 0;
+protected:
+	virtual void damage();
 };
 
 #endif // ACTOR_H_
