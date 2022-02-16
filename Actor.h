@@ -37,13 +37,15 @@ public:
 	Peach(int startX, int startY, StudentWorld* worldPtr);
 	virtual void doSomething();
 	virtual void bonk();
-	void decreaseHP();
+	void setHP(int hp);
+	void setPower(bool activated, int powerUp);
 
 private:
 	int m_hp;
 	int m_remaining_jump_distance;
 	int m_remaining_time_invincible;
 	int m_remaining_time_recharge;
+	int m_remaining_time_starPower;
 	bool isStarPower;
 	bool isShootPower;
 	bool isJumpPower;

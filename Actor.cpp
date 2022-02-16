@@ -53,6 +53,7 @@ Peach::Peach(int startX, int startY, StudentWorld* worldPtr) : Actor(IID_PEACH, 
 	m_remaining_jump_distance = 0;
 	m_remaining_time_invincible = 0;
 	m_remaining_time_recharge = 0;
+	m_remaining_time_starPower = 0;
 	isStarPower = false;
 	isShootPower = false;
 	isJumpPower = false;
@@ -104,8 +105,27 @@ void Peach::bonk() {
 	return;
 }
 
-void Peach::decreaseHP() {
-	m_hp--;
+void Peach::setHP(int hp) {
+	m_hp = hp;
+}
+
+void Peach::setPower(bool activated, int powerUp) {
+	switch (powerUp) {
+	case FLOWER:
+		isShootPower = activated;
+		cerr << "Shoot Power!" << endl; // Testing only
+		break;
+	case MUSHROOM:
+		isJumpPower = activated;
+		cerr << "Jump Power!" << endl; // Testing only
+		break;
+	case STAR:
+		isStarPower = activated;
+		if (activated)
+			m_remaining_time_starPower = 150;
+		cerr << "Star power!" << endl; // Testing only
+		break;
+	}
 }
 
 // Wall Class functions
@@ -161,6 +181,8 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 void PowerUp::doSomething() {
 	if (getWorldPtr()->overlapPeach(getX(), getY())) {
 		getWorldPtr()->playSound(SOUND_PLAYER_POWERUP);
+		getWorldPtr()->applyPeachPowerUp(getPowerUp());
+		getWorldPtr()->increaseScore(25 + 25 * getPowerUp());
 		kill();
 		return;
 	}
