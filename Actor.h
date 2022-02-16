@@ -10,13 +10,19 @@ class Actor : public GraphObject {
 public:
 	Actor(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir, int depth, double size);
 	virtual void doSomething() = 0;
-	virtual void bonk() = 0;
+	virtual void bonk();
 	virtual bool doesBlock() const;
 	virtual bool isDamageable() const;
 	virtual void dump() const;
-	StudentWorld* getWorldPtr() const;
 	bool isAlive() const;
 	virtual ~Actor();
+
+protected:
+	StudentWorld* getWorldPtr() const;
+	const int NO_GOODIE = 0;
+	const int FLOWER = 1;
+	const int MUSHROOM = 2;
+	const int STAR = 3;
 
 private:
 	bool m_isAlive;
@@ -45,6 +51,7 @@ class Wall : public Actor {
 public:
 	Wall(int imageID, int startX, int startY, StudentWorld* worldPtr);
 	virtual void doSomething();
+	virtual void bonk() = 0;
 	virtual bool doesBlock() const;
 	virtual bool isDamageable() const;
 };
@@ -56,16 +63,43 @@ public:
 
 private:
 	int m_goodie;
-	const int NO_GOODIE = 0;
-	const int FLOWER = 1;
-	const int MUSHROOM = 2;
-	const int STAR = 3;
 };
 
 class Pipe : public Wall {
 public:
 	Pipe(int startX, int startY, StudentWorld* worldPtr);
 	virtual void bonk();
+};
+
+class PowerUp : public Actor {
+public:
+	PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr);
+	virtual void doSomething();
+	virtual bool isDamageable() const;
+	virtual void bonk();
+protected:
+	virtual int getPowerUp() const = 0;
+};
+
+class Flower : public PowerUp {
+public:
+	Flower(int startX, int startY, StudentWorld* worldPtr);
+protected:
+	virtual int getPowerUp() const;
+};
+
+class Mushroom : public PowerUp {
+public:
+	Mushroom(int startX, int startY, StudentWorld* worldPtr);
+protected:
+	virtual int getPowerUp() const;
+};
+
+class Star : public PowerUp {
+public:
+	Star(int startX, int startY, StudentWorld* worldPtr);
+protected:
+	virtual int getPowerUp() const;
 };
 
 #endif // ACTOR_H_

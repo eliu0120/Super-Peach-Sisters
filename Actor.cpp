@@ -11,6 +11,10 @@ Actor::Actor(int imageID, int startX, int startY, StudentWorld* worldPtr, int di
 	m_worldPtr = worldPtr;
 }
 
+void Actor::bonk() {
+	return;
+}
+
 bool Actor::doesBlock() const {
 	return false;
 }
@@ -144,4 +148,48 @@ void Pipe::bonk() {
 	getWorldPtr()->playSound(SOUND_PLAYER_BONK);
 	// cerr << "Bonk!" << endl; // Testing only
 	return;
+}
+
+// PowerUp class functions
+PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : Actor(imageID, startX, startY, worldPtr, 0, 1, 1.0) {
+
+}
+
+void PowerUp::doSomething() {
+	return;
+}
+
+bool PowerUp::isDamageable() const {
+	return false;
+}
+
+void PowerUp::bonk() {
+	return;
+}
+
+// Flower class functions
+Flower::Flower(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_FLOWER, startX, startY, worldPtr) {
+
+}
+
+int Flower::getPowerUp() const {
+	return FLOWER;
+}
+
+// Mushroom class functions
+Mushroom::Mushroom(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_MUSHROOM, startX, startY, worldPtr) {
+
+}
+
+int Mushroom::getPowerUp() const {
+	return MUSHROOM;
+}
+
+// Star class functions
+Star::Star(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_STAR, startX, startY, worldPtr) {
+
+}
+
+int Star::getPowerUp() const {
+	return STAR;
 }
