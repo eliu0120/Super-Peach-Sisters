@@ -133,7 +133,7 @@ void Block::bonk() {
 		getWorldPtr()->playSound(SOUND_PLAYER_BONK);
 	else {
 		getWorldPtr()->playSound(SOUND_POWERUP_APPEARS);
-		getWorldPtr()->newPowerUp(m_goodie, getX(), getY() + 8);
+		getWorldPtr()->newPowerUp(m_goodie, getX(), getY() + 8); // Are we allowed to identify different power ups like this?
 		m_goodie = NO_GOODIE;
 	}
 	// cerr << "Bonk!" << endl; // Testing only
@@ -157,7 +157,26 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 }
 
 void PowerUp::doSomething() {
-	return;
+	int itr;
+	if (!getWorldPtr()->collideWall(getX(), getY() - 4, itr))
+		moveTo(getX(), getY() - 2);
+	switch (getDirection()) {
+	case left:
+		if (getWorldPtr()->collideWall(getX() - 4, getY(), itr)) {
+			setDirection(right);
+			return;
+		} else
+			moveTo(getX() - 2, getY());
+		break;
+	case right:
+		if (getWorldPtr()->collideWall(getX() + 4, getY(), itr)) {
+			setDirection(left);
+			return;
+		}
+		else
+			moveTo(getX() + 2, getY());
+		break;
+	}
 }
 
 bool PowerUp::isDamageable() const {
