@@ -64,6 +64,8 @@ void Peach::doSomething() {
 		if (m_remaining_time_starPower == 0)
 			setPower(false, STAR);
 	}
+	if (m_remaining_time_recharge > 0)
+		m_remaining_time_recharge--;
 	if (m_remaining_jump_distance > 0)
 		if (getWorldPtr()->collideWall(getX(), getY() + 4, true))
 			m_remaining_jump_distance = 0;
@@ -100,6 +102,11 @@ void Peach::doSomething() {
 			if (!isShootPower || m_remaining_time_recharge > 0)
 				break;
 			getWorldPtr()->playSound(SOUND_PLAYER_FIRE);
+			m_remaining_time_recharge = 8;
+			if (getDirection() == left)
+				getWorldPtr()->newPeachFireball(getX() - 4, getY(), left);
+			else
+				getWorldPtr()->newPeachFireball(getX() + 4, getY(), right);
 			break;
 		default:
 			break;
@@ -257,7 +264,7 @@ int Star::getPowerUp() const {
 }
 
 // Projectile class functions
-Projectile::Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr) : Actor(imageID, startX, startY, worldPtr, 0, 1, 1.0) {
+Projectile::Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir = 0) : Actor(imageID, startX, startY, worldPtr, dir, 1, 1.0) {
 
 }
 
@@ -270,5 +277,14 @@ bool Projectile::isDamageable() {
 }
 
 void Projectile::damage() {
+	return;
+}
+
+// PeachFireball class functions
+PeachFireball::PeachFireball(int startX, int startY, StudentWorld* worldPtr, int dir) : Projectile(IID_PEACH_FIRE, startX, startY, worldPtr, dir) {
+
+}
+
+void PeachFireball::isAbstract() {
 	return;
 }

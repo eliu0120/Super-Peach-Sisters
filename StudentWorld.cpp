@@ -147,6 +147,10 @@ void StudentWorld::applyPeachPowerUp(int powerUp) {
     m_peach->setPower(true, powerUp);
 }
 
+void StudentWorld::newPeachFireball(int startX, int startY, int dir) {
+    m_actors.push_back(new PeachFireball(startX, startY, this, dir));
+}
+
 StudentWorld::~StudentWorld() {
     cleanUp();
 }

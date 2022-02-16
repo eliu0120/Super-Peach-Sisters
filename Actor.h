@@ -114,12 +114,21 @@ protected:
 
 class Projectile : public Actor {
 public:
-	Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr);
+	Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir);
 	virtual void doSomething();
 	virtual bool isDamageable();
-	virtual ~Projectile() = 0;
+
 protected:
 	virtual void damage();
+	virtual void isAbstract() = 0;
+};
+
+class PeachFireball : public Projectile {
+public:
+	PeachFireball(int startX, int startY, StudentWorld* worldPtr, int dir);
+
+protected:
+	virtual void isAbstract();
 };
 
 #endif // ACTOR_H_

@@ -23,6 +23,7 @@ public:
 	void isOverlap(double x, double y, bool bonk);
 	void newPowerUp(int powerUp, int startX, int startY);
 	void applyPeachPowerUp(int powerUp);
+	void newPeachFireball(int startX, int startY, int dir);
 	~StudentWorld();
 
 private:
