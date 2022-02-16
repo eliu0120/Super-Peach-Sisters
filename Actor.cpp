@@ -70,14 +70,14 @@ void Peach::doSomething() {
 	if (getWorldPtr()->getKey(ch)) {
 		switch (ch) {
 		case KEY_PRESS_LEFT:
-			setDirection(180);
+			setDirection(left);
 			if (getWorldPtr()->collideWall(getX() - 4, getY(), itr))
 				getWorldPtr()->bonkActor(itr);
 			else
 				moveTo(getX() - 4, getY());
 			break;
 		case KEY_PRESS_RIGHT:
-			setDirection(0);
+			setDirection(right);
 			if (getWorldPtr()->collideWall(getX() + 4, getY(), itr))
 				getWorldPtr()->bonkActor(itr);
 			else
@@ -133,6 +133,17 @@ void Block::bonk() {
 		getWorldPtr()->playSound(SOUND_PLAYER_BONK);
 	else {
 		getWorldPtr()->playSound(SOUND_POWERUP_APPEARS);
+		switch (m_goodie) {
+		case FLOWER:
+			getWorldPtr()->newPowerUp(FLOWER, getX(), getY() + 8);
+			break;
+		case MUSHROOM:
+			getWorldPtr()->newPowerUp(MUSHROOM, getX(), getY() + 8);
+			break;
+		case STAR:
+			getWorldPtr()->newPowerUp(STAR, getX(), getY() + 8);
+			break;
+		}
 		m_goodie = NO_GOODIE;
 	}
 	// cerr << "Bonk!" << endl; // Testing only

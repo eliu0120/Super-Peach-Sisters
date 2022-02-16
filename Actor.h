@@ -5,6 +5,11 @@
 
 class StudentWorld;
 
+const int NO_GOODIE = 0;
+const int FLOWER = 1;
+const int MUSHROOM = 2;
+const int STAR = 3;
+
 // Students:  Add code to this file, Actor.cpp, StudentWorld.h, and StudentWorld.cpp
 class Actor : public GraphObject {
 public:
@@ -19,10 +24,6 @@ public:
 
 protected:
 	StudentWorld* getWorldPtr() const;
-	const int NO_GOODIE = 0;
-	const int FLOWER = 1;
-	const int MUSHROOM = 2;
-	const int STAR = 3;
 
 private:
 	bool m_isAlive;

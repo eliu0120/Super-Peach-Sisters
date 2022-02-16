@@ -19,6 +19,7 @@ public:
 	virtual void cleanUp();
 	bool collideWall(double x, double y, int& itr);
 	void bonkActor(int itr);
+	void newPowerUp(int powerUp, int startX, int startY);
 	~StudentWorld();
 
 private:

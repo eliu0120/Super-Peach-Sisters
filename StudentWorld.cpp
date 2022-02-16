@@ -101,6 +101,20 @@ void StudentWorld::bonkActor(int itr) {
     m_actors[itr]->bonk();
 }
 
+void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {
+    switch (powerUp) {
+    case FLOWER:
+        m_actors.push_back(new Flower(startX, startY, this));
+        break;
+    case MUSHROOM:
+        m_actors.push_back(new Mushroom(startX, startY, this));
+        break;
+    case STAR:
+        m_actors.push_back(new Star(startX, startY, this));
+        break;
+    }
+}
+
 StudentWorld::~StudentWorld() {
     cleanUp();
 }
