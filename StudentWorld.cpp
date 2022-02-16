@@ -40,6 +40,15 @@ int StudentWorld::init() {
                 case Level::block:
                     m_actors.push_back(new Block(j, i, 0, this));
                     break;
+                case Level::flower_goodie_block:
+                    m_actors.push_back(new Block(j, i, 1, this));
+                    break;
+                case Level::mushroom_goodie_block:
+                    m_actors.push_back(new Block(j, i, 2, this));
+                    break;
+                case Level::star_goodie_block:
+                    m_actors.push_back(new Block(j, i, 3, this));
+                    break;
                 case Level::pipe:
                     m_actors.push_back(new Pipe(j, i, this));
                     break;

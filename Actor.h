@@ -56,6 +56,10 @@ public:
 
 private:
 	int m_goodie;
+	const int NO_GOODIE = 0;
+	const int FLOWER = 1;
+	const int MUSHROOM = 2;
+	const int STAR = 3;
 };
 
 class Pipe : public Wall {

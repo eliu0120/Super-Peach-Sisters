@@ -125,7 +125,12 @@ Block::Block(int startX, int startY, int goodie, StudentWorld* worldPtr) : Wall(
 }
 
 void Block::bonk() {
-	getWorldPtr()->playSound(SOUND_PLAYER_BONK);
+	if (m_goodie == NO_GOODIE)
+		getWorldPtr()->playSound(SOUND_PLAYER_BONK);
+	else {
+		getWorldPtr()->playSound(SOUND_POWERUP_APPEARS);
+		m_goodie = NO_GOODIE;
+	}
 	// cerr << "Bonk!" << endl; // Testing only
 	return;
 }
