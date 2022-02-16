@@ -18,6 +18,7 @@ public:
 	virtual void bonk();
 	virtual bool doesBlock() const;
 	virtual bool isDamageable() const;
+	virtual bool isEnemy() const;
 	virtual void dump() const;
 	bool isAlive() const;
 	virtual ~Actor();

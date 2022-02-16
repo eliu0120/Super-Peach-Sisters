@@ -88,17 +88,21 @@ void StudentWorld::cleanUp() {
     // cerr << "Destructed " << j << " items!" << endl; // For testing purposes
 }
 
-bool StudentWorld::collideWall(double x, double y, int& itr) {
+bool StudentWorld::collideWall(double x, double y, bool bonk) {
     for (int i = 1; i < m_actors.size(); i++) // Change to i = 2 later - flag/mario will become m_actors[1]
         if (m_actors[i]->doesBlock() && (x - 4 <= m_actors[i]->getX() && x + 4 >= m_actors[i]->getX()) && (y - 4 <= m_actors[i]->getY() && y + 4 >= m_actors[i]->getY())) {
-            itr = i;
+            if (bonk)
+                m_actors[i]->bonk();
             return true;
         }
     return false;
 }
 
-void StudentWorld::bonkActor(int itr) {
-    m_actors[itr]->bonk();
+void StudentWorld::isOverlap(double x, double y, bool bonk) {
+    for (int i = 1; i < m_actors.size(); i++) // Change to i = 2 later - flag/mario will become m_actors[1]
+        if ((x - 6 <= m_actors[i]->getX() && x + 6 >= m_actors[i]->getX()) && (y - 6 <= m_actors[i]->getY() && y + 6 >= m_actors[i]->getY()))
+            if (bonk)
+                m_actors[i]->bonk();
 }
 
 void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {

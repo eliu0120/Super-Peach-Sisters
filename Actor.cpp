@@ -23,6 +23,10 @@ bool Actor::isDamageable() const {
 	return true;
 }
 
+bool Actor::isEnemy() const {
+	return false;
+}
+
 void Actor::dump() const { // Testing only
 	cerr << doesBlock() << " " << isDamageable() << endl;
 }
@@ -54,37 +58,31 @@ Peach::Peach(int startX, int startY, StudentWorld* worldPtr) : Actor(IID_PEACH, 
 void Peach::doSomething() {
 	if (!isAlive())
 		return;
-	int itr;
 	if (m_remaining_jump_distance > 0)
-		if (getWorldPtr()->collideWall(getX(), getY() + 4, itr)) {
-			getWorldPtr()->bonkActor(itr);
+		if (getWorldPtr()->collideWall(getX(), getY() + 4, true))
 			m_remaining_jump_distance = 0;
-		}
 		else {
 			moveTo(getX(), getY() + 4);
 			m_remaining_jump_distance--;
 		}
-	else if (!getWorldPtr()->collideWall(getX(), getY() - 4, itr))
+	else if (!getWorldPtr()->collideWall(getX(), getY() - 4, false))
 		moveTo(getX(), getY() - 4);
+	getWorldPtr()->isOverlap(getX(), getY(), true);
 	int ch;
 	if (getWorldPtr()->getKey(ch)) {
 		switch (ch) {
 		case KEY_PRESS_LEFT:
 			setDirection(left);
-			if (getWorldPtr()->collideWall(getX() - 4, getY(), itr))
-				getWorldPtr()->bonkActor(itr);
-			else
+			if (!getWorldPtr()->collideWall(getX() - 4, getY(), true))
 				moveTo(getX() - 4, getY());
 			break;
 		case KEY_PRESS_RIGHT:
 			setDirection(right);
-			if (getWorldPtr()->collideWall(getX() + 4, getY(), itr))
-				getWorldPtr()->bonkActor(itr);
-			else
+			if (!getWorldPtr()->collideWall(getX() + 4, getY(), true))
 				moveTo(getX() + 4, getY());
 			break;
 		case KEY_PRESS_UP:
-			if (getWorldPtr()->collideWall(getX(), getY() - 4, itr)) {
+			if (getWorldPtr()->collideWall(getX(), getY() - 4, false)) {
 				if (!isJumpPower)
 					m_remaining_jump_distance = 8;
 				else
@@ -157,19 +155,18 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 }
 
 void PowerUp::doSomething() {
-	int itr;
-	if (!getWorldPtr()->collideWall(getX(), getY() - 4, itr))
+	if (!getWorldPtr()->collideWall(getX(), getY() - 4, false))
 		moveTo(getX(), getY() - 2);
 	switch (getDirection()) {
 	case left:
-		if (getWorldPtr()->collideWall(getX() - 4, getY(), itr)) {
+		if (getWorldPtr()->collideWall(getX() - 4, getY(), false)) {
 			setDirection(right);
 			return;
 		} else
 			moveTo(getX() - 2, getY());
 		break;
 	case right:
-		if (getWorldPtr()->collideWall(getX() + 4, getY(), itr)) {
+		if (getWorldPtr()->collideWall(getX() + 4, getY(), false)) {
 			setDirection(left);
 			return;
 		}
@@ -184,6 +181,7 @@ bool PowerUp::isDamageable() const {
 }
 
 void PowerUp::bonk() {
+	cerr << "Bonk!" << endl;
 	return;
 }
 
