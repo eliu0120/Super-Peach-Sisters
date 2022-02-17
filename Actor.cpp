@@ -320,10 +320,34 @@ Enemy::Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int di
 }
 
 void Enemy::doSomething() {
-	return;
+	if (!isAlive())
+		return;
+	switch (getDirection()) {
+	case left:
+		if (getWorldPtr()->collideWall(getX() - 1, getY(), false) || !getWorldPtr()->collideWall(getX() - 8, getY() - 1, false))
+			setDirection(right);
+		break;
+	case right:
+		if (getWorldPtr()->collideWall(getX() + 1, getY(), false) || !getWorldPtr()->collideWall(getX() + 8, getY() - 1, false))
+			setDirection(left);
+		break;
+	}
+	switch (getDirection()) {
+	case left:
+		if (getWorldPtr()->collideWall(getX() - 1, getY(), false) || !getWorldPtr()->collideWall(getX() - 8, getY() - 1, false))
+			return;
+		moveTo(getX() - 1, getY());
+		break;
+	case right:
+		if (getWorldPtr()->collideWall(getX() + 1, getY(), false) || !getWorldPtr()->collideWall(getX() + 8, getY() - 1, false))
+			return;
+		moveTo(getX() + 1, getY());
+		break;
+	}
 }
 
 void Enemy::bonk() {
+	getWorldPtr()->playSound(SOUND_PLAYER_KICK);
 	kill();
 }
 

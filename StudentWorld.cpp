@@ -4,7 +4,6 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <cstdlib>
 using namespace std;
 
 GameWorld* createStudentWorld(string assetPath)
@@ -56,7 +55,7 @@ int StudentWorld::init() {
                     m_actors.push_back(new Pipe(j, i, this));
                     break;
                 case Level::goomba:
-                    dir = rand() % 2;
+                    dir = randInt(0, 1);
                     m_actors.push_back(new Goomba(j, i, this, dir * 180));
                     break;
                 case Level::empty:
