@@ -79,6 +79,10 @@ int StudentWorld::move()
     for (int i = 0; i < m_actors.size(); i++)
         if (m_actors[i]->isAlive()) {
             m_actors[i]->doSomething();
+            if (!m_peach->isAlive()) {
+                playSound(SOUND_PLAYER_DIE);
+                return GWSTATUS_PLAYER_DIED;
+            }
         }
     for (int i = 0; i < m_actors.size(); i++)
         if (!m_actors[i]->isAlive()) {
@@ -154,7 +158,6 @@ void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {
 }
 
 void StudentWorld::applyPeachPowerUp(int powerUp) {
-    m_peach->setHP(2);
     m_peach->setPower(true, powerUp);
 }
 

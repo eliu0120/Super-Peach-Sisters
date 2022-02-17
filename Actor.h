@@ -36,7 +36,6 @@ public:
 	Peach(int startX, int startY, StudentWorld* worldPtr);
 	virtual void doSomething();
 	virtual void bonk();
-	void setHP(int hp);
 	bool getStarPower() const;
 	bool getShootPower() const;
 	bool getJumpPower() const;
@@ -51,7 +50,6 @@ private:
 	bool isStarPower;
 	bool isShootPower;
 	bool isJumpPower;
-	bool isInvincible;
 };
 
 class Wall : public Actor {

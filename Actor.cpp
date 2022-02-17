@@ -53,7 +53,6 @@ Peach::Peach(int startX, int startY, StudentWorld* worldPtr) : Actor(IID_PEACH, 
 	isStarPower = false;
 	isShootPower = false;
 	isJumpPower = false;
-	isInvincible = false;
 }
 
 void Peach::doSomething() {
@@ -64,6 +63,8 @@ void Peach::doSomething() {
 		if (m_remaining_time_starPower == 0)
 			setPower(false, STAR);
 	}
+	if (m_remaining_time_invincible > 0)
+		m_remaining_time_invincible--;
 	if (m_remaining_time_recharge > 0)
 		m_remaining_time_recharge--;
 	if (m_remaining_jump_distance > 0)
@@ -115,11 +116,18 @@ void Peach::doSomething() {
 }
 
 void Peach::bonk() {
-	cerr << "Ouch!" << endl;
-}
-
-void Peach::setHP(int hp) {
-	m_hp = hp;
+	if (isStarPower || m_remaining_time_invincible > 0)
+		return;
+	m_hp--;
+	m_remaining_time_invincible = 10;
+	if (isShootPower)
+		isShootPower = false;
+	if (isJumpPower)
+		isJumpPower = false;
+	if (m_hp > 0)
+		getWorldPtr()->playSound(SOUND_PLAYER_HURT);
+	else
+		kill();
 }
 
 bool Peach::getStarPower() const {
@@ -138,17 +146,16 @@ void Peach::setPower(bool activated, int powerUp) {
 	switch (powerUp) {
 	case FLOWER:
 		isShootPower = activated;
-		// cerr << "Shoot Power!" << endl; // Testing only
+		m_hp = 2;
 		break;
 	case MUSHROOM:
 		isJumpPower = activated;
-		// cerr << "Jump Power!" << endl; // Testing only
+		m_hp = 2;
 		break;
 	case STAR:
 		isStarPower = activated;
 		if (activated)
 			m_remaining_time_starPower = 150;
-		// cerr << "Star power!" << endl; // Testing only
 		break;
 	}
 }
