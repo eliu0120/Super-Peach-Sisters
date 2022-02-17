@@ -121,11 +121,17 @@ bool StudentWorld::overlapPeach(double x, double y) {
     return (x - 7 <= m_peach->getX() && x + 7 >= m_peach->getX()) && (y - 7 <= m_peach->getY() && y + 7 >= m_peach->getY());
 }
 
-void StudentWorld::isOverlap(double x, double y, bool bonk) {
+bool StudentWorld::isOverlap(double x, double y, bool bonk) {
     for (int i = 0; i < m_actors.size(); i++) // Change to i = 1 later - flag/mario will become m_actors[1]
         if ((x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY()))
-            if (bonk)
+            if (bonk) {
                 m_actors[i]->bonk();
+                return true;
+            } else if (m_actors[i]->isDamageable()) {
+                m_actors[i]->kill();
+                return true;
+            }
+    return false;
 }
 
 void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {

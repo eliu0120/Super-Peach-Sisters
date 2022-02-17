@@ -116,10 +116,10 @@ class Projectile : public Actor {
 public:
 	Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir);
 	virtual void doSomething();
-	virtual bool isDamageable();
+	virtual bool isDamageable() const;
 
 protected:
-	virtual void damage();
+	virtual bool damage();
 	virtual void isAbstract() = 0;
 };
 

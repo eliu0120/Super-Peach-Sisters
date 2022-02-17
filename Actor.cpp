@@ -269,15 +269,40 @@ Projectile::Projectile(int imageID, int startX, int startY, StudentWorld* worldP
 }
 
 void Projectile::doSomething() {
-	return;
+	if (damage())
+		return;
+	if (!getWorldPtr()->collideWall(getX(), getY() - 2, false))
+		moveTo(getX(), getY() - 2);
+	switch (getDirection()) {
+	case left:
+		if (getWorldPtr()->collideWall(getX() - 2, getY(), false)) {
+			kill();
+			return;
+		}
+		else
+			moveTo(getX() - 2, getY());
+		break;
+	case right:
+		if (getWorldPtr()->collideWall(getX() + 2, getY(), false)) {
+			kill();
+			return;
+		}
+		else
+			moveTo(getX() + 2, getY());
+		break;
+	}
 }
 
-bool Projectile::isDamageable() {
+bool Projectile::isDamageable() const {
 	return false;
 }
 
-void Projectile::damage() {
-	return;
+bool Projectile::damage() {
+	if (getWorldPtr()->isOverlap(getX(), getY(), false)) {
+		kill();
+		return true;
+	}
+	return false;
 }
 
 // PeachFireball class functions
