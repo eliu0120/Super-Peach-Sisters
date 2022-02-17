@@ -20,7 +20,7 @@ public:
 	virtual bool isDamageable() const;
 	virtual void dump() const;
 	bool isAlive() const;
-	void kill();
+	virtual void kill();
 	virtual ~Actor();
 
 protected:
@@ -126,6 +126,25 @@ protected:
 class PeachFireball : public Projectile {
 public:
 	PeachFireball(int startX, int startY, StudentWorld* worldPtr, int dir);
+
+protected:
+	virtual void isAbstract();
+};
+
+class Enemy : public Actor {
+public:
+	Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir);
+	virtual void doSomething();
+	virtual void bonk();
+	virtual void kill();
+	
+protected:
+	virtual void isAbstract() = 0;
+};
+
+class Goomba : public Enemy {
+public:
+	Goomba(int startX, int startY, StudentWorld* worldPtr, int dir);
 
 protected:
 	virtual void isAbstract();

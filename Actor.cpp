@@ -313,3 +313,30 @@ PeachFireball::PeachFireball(int startX, int startY, StudentWorld* worldPtr, int
 void PeachFireball::isAbstract() {
 	return;
 }
+
+// Enemy class functions
+Enemy::Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir) : Actor(imageID, startX, startY, worldPtr, dir) {
+
+}
+
+void Enemy::doSomething() {
+	return;
+}
+
+void Enemy::bonk() {
+	kill();
+}
+
+void Enemy::kill() {
+	getWorldPtr()->increaseScore(100);
+	Actor::kill();
+}
+
+// Goomba class functions
+Goomba::Goomba(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(IID_GOOMBA, startX, startY, worldPtr, dir) {
+
+}
+
+void Goomba::isAbstract() {
+	return;
+}

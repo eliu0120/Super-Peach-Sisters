@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <cstdlib>
 using namespace std;
 
 GameWorld* createStudentWorld(string assetPath)
@@ -31,6 +32,7 @@ int StudentWorld::init() {
     if (result == Level::load_success) {
         // cerr << "Success" << endl; // Testing purposes only - delete
         Level::GridEntry ge;
+        int dir;
         for (int i = 0; i < VIEW_HEIGHT; i += 8)
             for (int j = 0; j < VIEW_WIDTH; j += 8) {
                 ge = lev.getContentsOf(j / 8, i / 8);
@@ -52,6 +54,10 @@ int StudentWorld::init() {
                     break;
                 case Level::pipe:
                     m_actors.push_back(new Pipe(j, i, this));
+                    break;
+                case Level::goomba:
+                    dir = rand() % 2;
+                    m_actors.push_back(new Goomba(j, i, this, dir * 180));
                     break;
                 case Level::empty:
                 default:
