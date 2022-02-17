@@ -24,6 +24,8 @@ public:
 	void newPowerUp(int powerUp, int startX, int startY);
 	void applyPeachPowerUp(int powerUp);
 	void newPeachFireball(int startX, int startY, int dir);
+	bool isPeachStarPower() const;
+	void bonkPeach();
 	~StudentWorld();
 
 private:

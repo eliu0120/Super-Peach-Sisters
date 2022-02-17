@@ -162,6 +162,14 @@ void StudentWorld::newPeachFireball(int startX, int startY, int dir) {
     m_actors.push_back(new PeachFireball(startX, startY, this, dir));
 }
 
+bool StudentWorld::isPeachStarPower() const {
+    return m_peach->getStarPower();
+}
+
+void StudentWorld::bonkPeach() {
+    m_peach->bonk();
+}
+
 StudentWorld::~StudentWorld() {
     cleanUp();
 }

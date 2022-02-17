@@ -347,8 +347,10 @@ void Enemy::doSomething() {
 }
 
 void Enemy::bonk() {
-	getWorldPtr()->playSound(SOUND_PLAYER_KICK);
-	kill();
+	if (getWorldPtr()->isPeachStarPower()) {
+		getWorldPtr()->playSound(SOUND_PLAYER_KICK);
+		kill();
+	}
 }
 
 void Enemy::kill() {
