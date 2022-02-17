@@ -129,6 +129,14 @@ protected:
 	virtual void isAbstract();
 };
 
+class Shell : public Projectile {
+public:
+	Shell(int startX, int startY, StudentWorld* worldPtr, int dir);
+
+protected:
+	virtual void isAbstract();
+};
+
 class Enemy : public Actor {
 public:
 	Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir);

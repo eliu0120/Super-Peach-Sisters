@@ -140,7 +140,7 @@ bool StudentWorld::isOverlap(double x, double y, bool bonk) {
             if (bonk) {
                 m_actors[i]->bonk();
                 return true;
-            } else if (m_actors[i]->isDamageable()) {
+            } else if (m_actors[i]->isDamageable() && m_actors[i]->isAlive()) {
                 m_actors[i]->kill();
                 return true;
             }
@@ -175,6 +175,10 @@ bool StudentWorld::isPeachStarPower() const {
 
 void StudentWorld::bonkPeach() {
     m_peach->bonk();
+}
+
+void StudentWorld::newShell(int startX, int startY, int dir) {
+    m_actors.push_back(new Shell(startX, startY, this, dir));
 }
 
 StudentWorld::~StudentWorld() {

@@ -26,6 +26,7 @@ public:
 	void newPeachFireball(int startX, int startY, int dir);
 	bool isPeachStarPower() const;
 	void bonkPeach();
+	void newShell(int startX, int startY, int dir);
 	~StudentWorld();
 
 private:

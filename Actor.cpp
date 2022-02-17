@@ -320,6 +320,15 @@ void PeachFireball::isAbstract() {
 	return;
 }
 
+// Shell class functions
+Shell::Shell(int startX, int startY, StudentWorld* worldPtr, int dir) : Projectile(IID_SHELL, startX, startY, worldPtr, dir) {
+	
+}
+
+void Shell::isAbstract() {
+	return;
+}
+
 // Enemy class functions
 Enemy::Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir) : Actor(imageID, startX, startY, worldPtr, dir) {
 
@@ -383,6 +392,7 @@ Koopa::Koopa(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(II
 }
 
 void Koopa::kill() {
+	getWorldPtr()->newShell(getX(), getY(), getDirection());
 	Enemy::kill();
 }
 
