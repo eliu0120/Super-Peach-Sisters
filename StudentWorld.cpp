@@ -58,6 +58,10 @@ int StudentWorld::init() {
                     dir = randInt(0, 1);
                     m_actors.push_back(new Goomba(j, i, this, dir * 180));
                     break;
+                case Level::koopa:
+                    dir = randInt(0, 1);
+                    m_actors.push_back(new Koopa(j, i, this, dir * 180));
+                    break;
                 case Level::empty:
                 default:
                     break;
@@ -158,7 +162,7 @@ void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {
 }
 
 void StudentWorld::applyPeachPowerUp(int powerUp) {
-    m_peach->setPower(true, powerUp);
+    m_peach->setPower(powerUp);
 }
 
 void StudentWorld::newPeachFireball(int startX, int startY, int dir) {

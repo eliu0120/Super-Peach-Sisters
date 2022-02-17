@@ -39,7 +39,7 @@ public:
 	bool getStarPower() const;
 	bool getShootPower() const;
 	bool getJumpPower() const;
-	void setPower(bool activated, int powerUp);
+	void setPower(int powerUp);
 
 private:
 	int m_hp;
@@ -144,6 +144,15 @@ class Goomba : public Enemy {
 public:
 	Goomba(int startX, int startY, StudentWorld* worldPtr, int dir);
 
+protected:
+	virtual void isAbstract();
+};
+
+class Koopa : public Enemy {
+public:
+	Koopa(int startX, int startY, StudentWorld* worldPtr, int dir);
+	virtual void kill();
+	
 protected:
 	virtual void isAbstract();
 };

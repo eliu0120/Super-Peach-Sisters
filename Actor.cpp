@@ -61,7 +61,7 @@ void Peach::doSomething() {
 	if (m_remaining_time_starPower > 0) {
 		m_remaining_time_starPower--;
 		if (m_remaining_time_starPower == 0)
-			setPower(false, STAR);
+			isStarPower = false;
 	}
 	if (m_remaining_time_invincible > 0)
 		m_remaining_time_invincible--;
@@ -142,20 +142,19 @@ bool Peach::getJumpPower() const {
 	return isJumpPower;
 }
 
-void Peach::setPower(bool activated, int powerUp) {
+void Peach::setPower(int powerUp) {
 	switch (powerUp) {
 	case FLOWER:
-		isShootPower = activated;
+		isShootPower = true;
 		m_hp = 2;
 		break;
 	case MUSHROOM:
-		isJumpPower = activated;
+		isJumpPower = true;
 		m_hp = 2;
 		break;
 	case STAR:
-		isStarPower = activated;
-		if (activated)
-			m_remaining_time_starPower = 150;
+		isStarPower = true;
+		m_remaining_time_starPower = 150;
 		break;
 	}
 }
@@ -375,5 +374,18 @@ Goomba::Goomba(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(
 }
 
 void Goomba::isAbstract() {
+	return;
+}
+
+// Koopa class functions
+Koopa::Koopa(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(IID_KOOPA, startX, startY, worldPtr, dir) {
+
+}
+
+void Koopa::kill() {
+	Enemy::kill();
+}
+
+void Koopa::isAbstract() {
 	return;
 }
