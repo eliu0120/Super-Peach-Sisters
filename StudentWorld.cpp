@@ -62,6 +62,10 @@ int StudentWorld::init() {
                     dir = randInt(0, 1);
                     m_actors.push_back(new Koopa(j, i, this, dir * 180));
                     break;
+                case Level::piranha:
+                    dir = randInt(0, 1);
+                    m_actors.push_back(new Piranha(j, i, this, dir * 180));
+                    break;
                 case Level::empty:
                 default:
                     break;

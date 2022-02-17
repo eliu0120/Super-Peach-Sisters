@@ -18,6 +18,7 @@ public:
 	virtual void bonk();
 	virtual bool doesBlock() const;
 	virtual bool isDamageable() const;
+	virtual bool isObjective() const;
 	virtual void dump() const;
 	bool isAlive() const;
 	virtual void kill();
@@ -118,23 +119,16 @@ public:
 
 protected:
 	virtual bool damage();
-	virtual void isAbstract() = 0;
 };
 
 class PeachFireball : public Projectile {
 public:
 	PeachFireball(int startX, int startY, StudentWorld* worldPtr, int dir);
-
-protected:
-	virtual void isAbstract();
 };
 
 class Shell : public Projectile {
 public:
 	Shell(int startX, int startY, StudentWorld* worldPtr, int dir);
-
-protected:
-	virtual void isAbstract();
 };
 
 class Enemy : public Actor {
@@ -144,25 +138,26 @@ public:
 	virtual void bonk();
 	virtual void kill();
 	
-protected:
-	virtual void isAbstract() = 0;
 };
 
 class Goomba : public Enemy {
 public:
 	Goomba(int startX, int startY, StudentWorld* worldPtr, int dir);
-
-protected:
-	virtual void isAbstract();
 };
 
 class Koopa : public Enemy {
 public:
 	Koopa(int startX, int startY, StudentWorld* worldPtr, int dir);
 	virtual void kill();
-	
-protected:
-	virtual void isAbstract();
+};
+
+class Piranha : public Enemy {
+public:
+	Piranha(int startX, int startY, StudentWorld* worldPtr, int dir);
+	virtual void doSomething();
+
+private:
+	int m_remaining_time_reload;
 };
 
 #endif // ACTOR_H_

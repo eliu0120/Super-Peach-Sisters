@@ -23,6 +23,10 @@ bool Actor::isDamageable() const {
 	return true;
 }
 
+bool Actor::isObjective() const {
+	return false;
+}
+
 void Actor::dump() const { // Testing only
 	cerr << doesBlock() << " " << isDamageable() << endl;
 }
@@ -316,19 +320,10 @@ PeachFireball::PeachFireball(int startX, int startY, StudentWorld* worldPtr, int
 
 }
 
-void PeachFireball::isAbstract() {
-	return;
-}
-
 // Shell class functions
 Shell::Shell(int startX, int startY, StudentWorld* worldPtr, int dir) : Projectile(IID_SHELL, startX, startY, worldPtr, dir) {
 	
 }
-
-void Shell::isAbstract() {
-	return;
-}
-
 // Enemy class functions
 Enemy::Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir) : Actor(imageID, startX, startY, worldPtr, dir) {
 
@@ -382,10 +377,6 @@ Goomba::Goomba(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(
 
 }
 
-void Goomba::isAbstract() {
-	return;
-}
-
 // Koopa class functions
 Koopa::Koopa(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(IID_KOOPA, startX, startY, worldPtr, dir) {
 
@@ -396,6 +387,11 @@ void Koopa::kill() {
 	Enemy::kill();
 }
 
-void Koopa::isAbstract() {
+// Piranha class functions
+Piranha::Piranha(int startX, int startY, StudentWorld* worldPtr, int dir) : Enemy(IID_PIRANHA, startX, startY, worldPtr, dir) {
+	m_remaining_time_reload = 0;
+}
+
+void Piranha::doSomething() {
 	return;
 }
