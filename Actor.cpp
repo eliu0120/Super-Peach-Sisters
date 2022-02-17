@@ -115,7 +115,7 @@ void Peach::doSomething() {
 }
 
 void Peach::bonk() {
-	return;
+	cerr << "Ouch!" << endl;
 }
 
 void Peach::setHP(int hp) {
@@ -322,6 +322,10 @@ Enemy::Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int di
 void Enemy::doSomething() {
 	if (!isAlive())
 		return;
+	if (getWorldPtr()->overlapPeach(getX(), getY())) {
+		getWorldPtr()->bonkPeach();
+		return;
+	}
 	switch (getDirection()) {
 	case left:
 		if (getWorldPtr()->collideWall(getX() - 1, getY(), false) || !getWorldPtr()->collideWall(getX() - 8, getY() - 1, false))
