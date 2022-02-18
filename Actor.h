@@ -145,7 +145,6 @@ public:
 	virtual void doSomething();
 	virtual void bonk();
 	virtual void kill();
-	
 };
 
 class Goomba : public Enemy {

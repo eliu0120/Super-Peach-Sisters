@@ -88,6 +88,7 @@ int StudentWorld::move()
         if (m_actors[i]->isAlive()) {
             m_actors[i]->doSomething();
             if (!m_peach->isAlive()) {
+                decLives();
                 playSound(SOUND_PLAYER_DIE);
                 return GWSTATUS_PLAYER_DIED;
             }
