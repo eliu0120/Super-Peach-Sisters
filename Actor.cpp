@@ -428,3 +428,21 @@ void Piranha::doSomething() {
 		m_remaining_time_reload = 40;
 	}
 }
+
+// Objective class functions
+Objective::Objective(int imageID, int startX, int startY, StudentWorld* worldPtr) : Actor(imageID, startX, startY, worldPtr, 0, 1, 1.0) {
+
+}
+
+void Objective::doSomething() {
+	return;
+}
+
+// Flag class functions
+Flag::Flag(int startX, int startY, StudentWorld* worldPtr) : Objective(IID_FLAG, startX, startY, worldPtr) {
+
+}
+
+void Flag::activeObjective() {
+	return;
+}

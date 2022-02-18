@@ -167,4 +167,20 @@ private:
 	int m_remaining_time_reload;
 };
 
+class Objective : public Actor {
+public:
+	Objective(int imageID, int startX, int startY, StudentWorld* worldPtr);
+	virtual void doSomething();
+
+protected:
+	virtual void activeObjective() = 0;
+};
+
+class Flag : public Objective {
+public:
+	Flag(int startX, int startY, StudentWorld* worldPtr);
+
+protected:
+	virtual void activeObjective();
+};
 #endif // ACTOR_H_

@@ -35,6 +35,8 @@ public:
 private:
 	vector<Actor*> m_actors;
 	Peach* m_peach;
+	bool m_levelFinished;
+	bool m_gameFinished;
 };
 
 #endif // STUDENTWORLD_H_

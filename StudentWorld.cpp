@@ -15,16 +15,12 @@ GameWorld* createStudentWorld(string assetPath)
 
 StudentWorld::StudentWorld(string assetPath) : GameWorld(assetPath) {
     m_peach = nullptr;
-    /* // This section is for testing only
-    m_actors.push_back(new Peach(0, 0, this));
-    m_actors.push_back(new Block(0, 8, 0, this));
-    m_actors.push_back(new Block(0, 16, 0, this));
-    m_actors.push_back(new Block(0, 25, 0, this));
-    for (int i = 0; i < m_actors.size(); i++)
-        m_actors[i]->dump(); */
+    m_levelFinished = false;
+    m_gameFinished = false;
 }
 
 int StudentWorld::init() {
+    m_levelFinished = false;
     Level lev(assetPath());
     string level_file = "level01.txt";
     Level::LoadResult result = lev.loadLevel(level_file);
@@ -65,6 +61,9 @@ int StudentWorld::init() {
                 case Level::piranha:
                     dir = randInt(0, 1);
                     m_actors.push_back(new Piranha(j, i, this, dir * 180));
+                    break;
+                case Level::flag:
+                    m_actors.push_back(new Flag(j, i, this));
                     break;
                 case Level::empty:
                 default:
@@ -148,7 +147,7 @@ bool StudentWorld::isCloseToPeach(double x, int& dir) const {
         dir = GraphObject::left;
     else
         dir = GraphObject::right;
-    return x - 8 * SPRITE_WIDTH < m_peach->getX() && x + 8 * SPRITE_WIDTH > m_peach->getX();
+    return (x - SPRITE_WIDTH * 8 < m_peach->getX() && x + SPRITE_WIDTH * 8 > m_peach->getX());
 }
 
 bool StudentWorld::isOverlap(double x, double y, bool bonk) {
