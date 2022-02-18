@@ -134,8 +134,20 @@ bool StudentWorld::collideWall(double x, double y, bool bonk) {
     return false;
 }
 
-bool StudentWorld::overlapPeach(double x, double y) {
+bool StudentWorld::overlapPeach(double x, double y) const {
     return (x - 7 <= m_peach->getX() && x + 7 >= m_peach->getX()) && (y - 7 <= m_peach->getY() && y + 7 >= m_peach->getY());
+}
+
+bool StudentWorld::sameHeightAsPeach(double y) const {
+    return (y - SPRITE_HEIGHT * 1.5 <= m_peach->getY() && y + SPRITE_HEIGHT * 1.5 >= m_peach->getY());
+}
+
+bool StudentWorld::isCloseToPeach(double x, int& dir) const {
+    if (m_peach->getX() <= x)
+        dir = GraphObject::left;
+    else
+        dir = GraphObject::right;
+    return x - 8 < m_peach->getX() && x + 8 > m_peach->getX();
 }
 
 bool StudentWorld::isOverlap(double x, double y, bool bonk) {

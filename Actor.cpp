@@ -393,5 +393,18 @@ Piranha::Piranha(int startX, int startY, StudentWorld* worldPtr, int dir) : Enem
 }
 
 void Piranha::doSomething() {
-	return;
+	increaseAnimationNumber();
+	if (getWorldPtr()->overlapPeach(getX(), getY())) {
+		getWorldPtr()->bonkPeach();
+		return;
+	}
+	if (!getWorldPtr()->sameHeightAsPeach(getY()))
+		return;
+	int dir;
+	bool closeToPeach = getWorldPtr()->isCloseToPeach(getX(), dir);
+	setDirection(dir);
+	if (m_remaining_time_reload > 0) {
+		m_remaining_time_reload--;
+		return;
+	}
 }

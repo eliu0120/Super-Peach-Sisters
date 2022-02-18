@@ -19,7 +19,9 @@ public:
 	virtual int move();
 	virtual void cleanUp();
 	bool collideWall(double x, double y, bool bonk);
-	bool overlapPeach(double x, double y);
+	bool overlapPeach(double x, double y) const;
+	bool sameHeightAsPeach(double y) const;
+	bool isCloseToPeach(double x, int& dir) const;
 	bool isOverlap(double x, double y, bool bonk);
 	void newPowerUp(int powerUp, int startX, int startY);
 	void applyPeachPowerUp(int powerUp);
