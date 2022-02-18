@@ -197,6 +197,10 @@ void StudentWorld::newShell(int startX, int startY, int dir) {
     m_actors.push_back(new Shell(startX, startY, this, dir));
 }
 
+void StudentWorld::newPiranhaFireball(int startX, int startY, int dir) {
+    m_actors.push_back(new PiranhaFireball(startX, startY, this, dir));
+}
+
 StudentWorld::~StudentWorld() {
     cleanUp();
 }

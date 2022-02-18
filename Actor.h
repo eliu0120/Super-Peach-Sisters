@@ -131,6 +131,14 @@ public:
 	Shell(int startX, int startY, StudentWorld* worldPtr, int dir);
 };
 
+class PiranhaFireball : public Projectile {
+public:
+	PiranhaFireball(int startX, int startY, StudentWorld* worldPtr, int dir);
+
+protected:
+	virtual bool damage();
+};
+
 class Enemy : public Actor {
 public:
 	Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir);

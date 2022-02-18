@@ -324,6 +324,21 @@ PeachFireball::PeachFireball(int startX, int startY, StudentWorld* worldPtr, int
 Shell::Shell(int startX, int startY, StudentWorld* worldPtr, int dir) : Projectile(IID_SHELL, startX, startY, worldPtr, dir) {
 	
 }
+
+// PiranhaFireball class functions 
+PiranhaFireball::PiranhaFireball(int startX, int startY, StudentWorld* worldPtr, int dir) : Projectile(IID_PIRANHA_FIRE, startX, startY, worldPtr, dir) {
+
+}
+
+bool PiranhaFireball::damage() {
+	if (getWorldPtr()->overlapPeach(getX(), getY())) {
+		getWorldPtr()->bonkPeach();
+		kill();
+		return true;
+	}
+	return false;
+}
+
 // Enemy class functions
 Enemy::Enemy(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir) : Actor(imageID, startX, startY, worldPtr, dir) {
 
@@ -408,8 +423,7 @@ void Piranha::doSomething() {
 		return;
 	}
 	if (closeToPeach) {
-		// New fireball
-		cerr << "Fireball!" << endl;
+		getWorldPtr()->newPiranhaFireball(getX(), getY(), getDirection());
 		getWorldPtr()->playSound(SOUND_PIRANHA_FIRE);
 		m_remaining_time_reload = 40;
 	}

@@ -29,6 +29,7 @@ public:
 	bool isPeachStarPower() const;
 	void bonkPeach();
 	void newShell(int startX, int startY, int dir);
+	void newPiranhaFireball(int startX, int startY, int dir);
 	~StudentWorld();
 
 private:
