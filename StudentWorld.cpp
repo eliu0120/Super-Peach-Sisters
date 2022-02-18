@@ -147,7 +147,7 @@ bool StudentWorld::isCloseToPeach(double x, int& dir) const {
         dir = GraphObject::left;
     else
         dir = GraphObject::right;
-    return x - 8 < m_peach->getX() && x + 8 > m_peach->getX();
+    return x - 8 * SPRITE_WIDTH < m_peach->getX() && x + 8 * SPRITE_WIDTH > m_peach->getX();
 }
 
 bool StudentWorld::isOverlap(double x, double y, bool bonk) {

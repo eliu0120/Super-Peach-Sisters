@@ -407,4 +407,10 @@ void Piranha::doSomething() {
 		m_remaining_time_reload--;
 		return;
 	}
+	if (closeToPeach) {
+		// New fireball
+		cerr << "Fireball!" << endl;
+		getWorldPtr()->playSound(SOUND_PIRANHA_FIRE);
+		m_remaining_time_reload = 40;
+	}
 }
