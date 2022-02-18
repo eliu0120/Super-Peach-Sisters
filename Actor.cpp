@@ -23,14 +23,6 @@ bool Actor::isDamageable() const {
 	return true;
 }
 
-bool Actor::isObjective() const {
-	return false;
-}
-
-void Actor::dump() const { // Testing only
-	cerr << doesBlock() << " " << isDamageable() << endl;
-}
-
 StudentWorld* Actor::getWorldPtr() const {
 	return m_worldPtr;
 }
@@ -44,7 +36,7 @@ void Actor::kill() {
 }
 
 Actor::~Actor() {
-	// cerr << "Destructing!" << endl; // For testing purposes only
+
 }
 
 // Peach class functions
@@ -193,7 +185,6 @@ void Block::bonk() {
 		getWorldPtr()->newPowerUp(m_goodie, getX(), getY() + 8); // Are we allowed to identify different power ups like this?
 		m_goodie = NO_GOODIE;
 	}
-	// cerr << "Bonk!" << endl; // Testing only
 	return;
 }
 
@@ -204,7 +195,6 @@ Pipe::Pipe(int startX, int startY, StudentWorld* worldPtr) : Wall(IID_PIPE, star
 
 void Pipe::bonk() {
 	getWorldPtr()->playSound(SOUND_PLAYER_BONK);
-	// cerr << "Bonk!" << endl; // Testing only
 	return;
 }
 
@@ -444,6 +434,10 @@ void Objective::doSomething() {
 	}
 }
 
+bool Objective::isDamageable() const {
+	return false;
+}
+
 // Flag class functions
 Flag::Flag(int startX, int startY, StudentWorld* worldPtr) : Objective(IID_FLAG, startX, startY, worldPtr) {
 
@@ -451,4 +445,13 @@ Flag::Flag(int startX, int startY, StudentWorld* worldPtr) : Objective(IID_FLAG,
 
 void Flag::activateObjective() {
 	getWorldPtr()->finishLevel();
+}
+
+// Mario class functions
+Mario::Mario(int startX, int startY, StudentWorld* worldPtr) : Objective(IID_MARIO, startX, startY, worldPtr) {
+
+}
+
+void Mario::activateObjective() {
+	getWorldPtr()->finishGame();
 }

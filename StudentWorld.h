@@ -31,6 +31,7 @@ public:
 	void newShell(int startX, int startY, int dir);
 	void newPiranhaFireball(int startX, int startY, int dir);
 	void finishLevel();
+	void finishGame();
 	~StudentWorld();
 
 private:

@@ -22,10 +22,11 @@ StudentWorld::StudentWorld(string assetPath) : GameWorld(assetPath) {
 int StudentWorld::init() {
     m_levelFinished = false;
     Level lev(assetPath());
-    string level_file = "level01.txt";
+    ostringstream oss;
+    oss << "level0" << getLevel() << ".txt";
+    string level_file = oss.str();
     Level::LoadResult result = lev.loadLevel(level_file);
     if (result == Level::load_success) {
-        // cerr << "Success" << endl; // Testing purposes only - delete
         Level::GridEntry ge;
         int dir;
         for (int i = 0; i < VIEW_HEIGHT; i += 8)
@@ -65,15 +66,16 @@ int StudentWorld::init() {
                 case Level::flag:
                     m_actors.push_back(new Flag(j, i, this));
                     break;
+                case Level::mario:
+                    m_actors.push_back(new Mario(j, i, this));
+                    break;
                 case Level::empty:
                 default:
                     break;
                 }
             }
-    } else {
-        cerr << "Level not found" << endl;
+    } else
         return GWSTATUS_LEVEL_ERROR;
-    }
     return GWSTATUS_CONTINUE_GAME;
 }
 
@@ -90,6 +92,10 @@ int StudentWorld::move()
                 decLives();
                 playSound(SOUND_PLAYER_DIE);
                 return GWSTATUS_PLAYER_DIED;
+            }
+            if (m_gameFinished) {
+                playSound(SOUND_GAME_OVER);
+                return GWSTATUS_PLAYER_WON;
             }
             if (m_levelFinished) {
                 playSound(SOUND_FINISHED_LEVEL);
@@ -117,15 +123,12 @@ int StudentWorld::move()
 
 void StudentWorld::cleanUp() {
     int i = 0;
-    // int j = 0; // For testing purposes
     delete m_peach;
     while (i < m_actors.size()) {
         Actor* kill = m_actors[m_actors.size() - 1];
         m_actors.pop_back();
         delete kill;
-        // j++; // For testing purposes
     }
-    // cerr << "Destructed " << j << " items!" << endl; // For testing purposes
 }
 
 bool StudentWorld::collideWall(double x, double y, bool bonk) {
@@ -207,6 +210,10 @@ void StudentWorld::newPiranhaFireball(int startX, int startY, int dir) {
 
 void StudentWorld::finishLevel() {
     m_levelFinished = true;
+}
+
+void StudentWorld::finishGame() {
+    m_gameFinished = true;
 }
 
 StudentWorld::~StudentWorld() {

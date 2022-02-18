@@ -18,8 +18,6 @@ public:
 	virtual void bonk();
 	virtual bool doesBlock() const;
 	virtual bool isDamageable() const;
-	virtual bool isObjective() const;
-	virtual void dump() const;
 	bool isAlive() const;
 	virtual void kill();
 	virtual ~Actor();
@@ -171,6 +169,7 @@ class Objective : public Actor {
 public:
 	Objective(int imageID, int startX, int startY, StudentWorld* worldPtr);
 	virtual void doSomething();
+	virtual bool isDamageable() const;
 
 protected:
 	virtual void activateObjective() = 0;
@@ -179,6 +178,14 @@ protected:
 class Flag : public Objective {
 public:
 	Flag(int startX, int startY, StudentWorld* worldPtr);
+
+protected:
+	virtual void activateObjective();
+};
+
+class Mario : public Objective {
+public:
+	Mario(int startX, int startY, StudentWorld* worldPtr);
 
 protected:
 	virtual void activateObjective();
