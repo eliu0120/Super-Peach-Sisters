@@ -71,6 +71,7 @@ void Peach::doSomething() {
 		m_remaining_time_invincible--;
 	if (m_remaining_time_recharge > 0)
 		m_remaining_time_recharge--;
+	getWorldPtr()->isOverlap(getX(), getY(), true);
 	if (m_remaining_jump_distance > 0)
 		if (getWorldPtr()->collideWall(getX(), getY() + 4, true))
 			m_remaining_jump_distance = 0;
@@ -80,7 +81,6 @@ void Peach::doSomething() {
 		}
 	else if (!getWorldPtr()->collideWall(getX(), getY() - 4, false))
 		moveTo(getX(), getY() - 4);
-	getWorldPtr()->isOverlap(getX(), getY(), true);
 	int ch;
 	if (getWorldPtr()->getKey(ch)) {
 		switch (ch) {
@@ -435,7 +435,13 @@ Objective::Objective(int imageID, int startX, int startY, StudentWorld* worldPtr
 }
 
 void Objective::doSomething() {
-	return;
+	if (!isAlive())
+		return;
+	if (getWorldPtr()->overlapPeach(getX(), getY())) {
+		getWorldPtr()->increaseScore(1000);
+		kill();
+		activateObjective();
+	}
 }
 
 // Flag class functions
@@ -443,6 +449,6 @@ Flag::Flag(int startX, int startY, StudentWorld* worldPtr) : Objective(IID_FLAG,
 
 }
 
-void Flag::activeObjective() {
-	return;
+void Flag::activateObjective() {
+	getWorldPtr()->finishLevel();
 }

@@ -91,6 +91,10 @@ int StudentWorld::move()
                 playSound(SOUND_PLAYER_DIE);
                 return GWSTATUS_PLAYER_DIED;
             }
+            if (m_levelFinished) {
+                playSound(SOUND_FINISHED_LEVEL);
+                return GWSTATUS_FINISHED_LEVEL;
+            }
         }
     for (int i = 0; i < m_actors.size(); i++)
         if (!m_actors[i]->isAlive()) {
@@ -199,6 +203,10 @@ void StudentWorld::newShell(int startX, int startY, int dir) {
 
 void StudentWorld::newPiranhaFireball(int startX, int startY, int dir) {
     m_actors.push_back(new PiranhaFireball(startX, startY, this, dir));
+}
+
+void StudentWorld::finishLevel() {
+    m_levelFinished = true;
 }
 
 StudentWorld::~StudentWorld() {

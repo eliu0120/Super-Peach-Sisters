@@ -173,7 +173,7 @@ public:
 	virtual void doSomething();
 
 protected:
-	virtual void activeObjective() = 0;
+	virtual void activateObjective() = 0;
 };
 
 class Flag : public Objective {
@@ -181,6 +181,6 @@ public:
 	Flag(int startX, int startY, StudentWorld* worldPtr);
 
 protected:
-	virtual void activeObjective();
+	virtual void activateObjective();
 };
 #endif // ACTOR_H_
