@@ -2,7 +2,6 @@
 #include "GameConstants.h"
 #include "Actor.h"
 #include <string>
-#include <iostream>
 #include <sstream>
 using namespace std;
 
@@ -158,7 +157,7 @@ bool StudentWorld::isCloseToPeach(double x, int& dir) const {
 }
 
 bool StudentWorld::isOverlap(double x, double y, bool bonk) {
-    for (int i = 0; i < m_actors.size(); i++) // Change to i = 1 later - flag/mario will become m_actors[1]
+    for (int i = 0; i < m_actors.size(); i++) 
         if ((x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY()))
             if (bonk) {
                 m_actors[i]->bonk();
@@ -184,8 +183,16 @@ void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {
     }
 }
 
-void StudentWorld::applyPeachPowerUp(int powerUp) {
-    m_peach->setPower(powerUp);
+void StudentWorld::applyPeachFlower() {
+    m_peach->setPower(FLOWER);
+}
+
+void StudentWorld::applyPeachMushroom() {
+    m_peach->setPower(MUSHROOM);
+}
+
+void StudentWorld::applyPeachStar() {
+    m_peach->setPower(STAR);
 }
 
 void StudentWorld::newPeachFireball(int startX, int startY, int dir) {

@@ -1,7 +1,6 @@
 #include "Actor.h"
 #include "StudentWorld.h"
 #include "GraphObject.h"
-#include <iostream>
 using namespace std;
 
 // Students:  Add code to this file, Actor.h, StudentWorld.h, and StudentWorld.cpp
@@ -206,8 +205,7 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 void PowerUp::doSomething() {
 	if (getWorldPtr()->overlapPeach(getX(), getY())) {
 		getWorldPtr()->playSound(SOUND_PLAYER_POWERUP);
-		getWorldPtr()->applyPeachPowerUp(getPowerUp());
-		getWorldPtr()->increaseScore(25 + 25 * getPowerUp());
+		getPowerUp();
 		kill();
 		return;
 	}
@@ -241,8 +239,9 @@ Flower::Flower(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_FLO
 
 }
 
-int Flower::getPowerUp() const {
-	return FLOWER;
+void Flower::getPowerUp() const {
+	getWorldPtr()->applyPeachFlower();
+	getWorldPtr()->increaseScore(50);
 }
 
 // Mushroom class functions
@@ -250,8 +249,9 @@ Mushroom::Mushroom(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID
 
 }
 
-int Mushroom::getPowerUp() const {
-	return MUSHROOM;
+void Mushroom::getPowerUp() const {
+	getWorldPtr()->applyPeachMushroom();
+	getWorldPtr()->increaseScore(75);
 }
 
 // Star class functions
@@ -259,12 +259,13 @@ Star::Star(int startX, int startY, StudentWorld* worldPtr) : PowerUp(IID_STAR, s
 
 }
 
-int Star::getPowerUp() const {
-	return STAR;
+void Star::getPowerUp() const {
+	getWorldPtr()->applyPeachStar();
+	getWorldPtr()->increaseScore(100);
 }
 
 // Projectile class functions
-Projectile::Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir = 0) : Actor(imageID, startX, startY, worldPtr, dir, 1, 1.0) {
+Projectile::Projectile(int imageID, int startX, int startY, StudentWorld* worldPtr, int dir) : Actor(imageID, startX, startY, worldPtr, dir, 1, 1.0) {
 
 }
 

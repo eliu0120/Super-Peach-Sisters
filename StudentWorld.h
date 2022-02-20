@@ -24,7 +24,9 @@ public:
 	bool isCloseToPeach(double x, int& dir) const;
 	bool isOverlap(double x, double y, bool bonk);
 	void newPowerUp(int powerUp, int startX, int startY);
-	void applyPeachPowerUp(int powerUp);
+	void applyPeachFlower();
+	void applyPeachMushroom();
+	void applyPeachStar();
 	void newPeachFireball(int startX, int startY, int dir);
 	bool isPeachStarPower() const;
 	void bonkPeach();

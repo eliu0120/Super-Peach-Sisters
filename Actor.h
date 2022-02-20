@@ -82,7 +82,7 @@ public:
 	virtual bool isDamageable() const;
 
 protected:
-	virtual int getPowerUp() const = 0;
+	virtual void getPowerUp() const = 0;
 };
 
 class Flower : public PowerUp {
@@ -90,7 +90,7 @@ public:
 	Flower(int startX, int startY, StudentWorld* worldPtr);
 
 protected:
-	virtual int getPowerUp() const;
+	virtual void getPowerUp() const;
 };
 
 class Mushroom : public PowerUp {
@@ -98,7 +98,7 @@ public:
 	Mushroom(int startX, int startY, StudentWorld* worldPtr);
 
 protected:
-	virtual int getPowerUp() const;
+	virtual void getPowerUp() const;
 };
 
 class Star : public PowerUp {
@@ -106,7 +106,7 @@ public:
 	Star(int startX, int startY, StudentWorld* worldPtr);
 
 protected:
-	virtual int getPowerUp() const;
+	virtual void getPowerUp() const;
 };
 
 class Projectile : public Actor {
