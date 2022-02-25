@@ -399,6 +399,8 @@ Piranha::Piranha(int startX, int startY, StudentWorld* worldPtr, int dir) : Enem
 }
 
 void Piranha::doSomething() {
+	if (!isAlive())
+		return;
 	increaseAnimationNumber();
 	if (getWorldPtr()->overlapPeach(getX(), getY())) {
 		getWorldPtr()->bonkPeach();
