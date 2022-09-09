@@ -181,7 +181,7 @@ void Block::bonk() {
 		getWorldPtr()->playSound(SOUND_PLAYER_BONK);
 	else {
 		getWorldPtr()->playSound(SOUND_POWERUP_APPEARS);
-		getWorldPtr()->newPowerUp(m_goodie, getX(), getY() + 8); // Are we allowed to identify different power ups like this?
+		getWorldPtr()->newPowerUp(m_goodie, getX(), getY() + 8); 
 		m_goodie = NO_GOODIE;
 	}
 	return;
@@ -204,9 +204,9 @@ PowerUp::PowerUp(int imageID, int startX, int startY, StudentWorld* worldPtr) : 
 
 void PowerUp::doSomething() {
 	if (getWorldPtr()->overlapPeach(getX(), getY())) {
-		getWorldPtr()->playSound(SOUND_PLAYER_POWERUP);
 		getPowerUp();
 		kill();
+		getWorldPtr()->playSound(SOUND_PLAYER_POWERUP);
 		return;
 	}
 	if (!getWorldPtr()->collideWall(getX(), getY() - 2, false))

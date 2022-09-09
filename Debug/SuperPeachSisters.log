@@ -1,0 +1,19 @@
+﻿  Actor.cpp
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(103,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(103,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(105,53): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(105,44): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(184,54): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(184,43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(392,38): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(392,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(419,49): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\Actor.cpp(419,41): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  StudentWorld.cpp
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\StudentWorld.cpp(84,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\StudentWorld.cpp(101,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\StudentWorld.cpp(123,14): warning C4018: '<': signed/unsigned mismatch
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\StudentWorld.cpp(131,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\SuperPeachSisters\StudentWorld.cpp(158,23): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  SuperPeachSisters.vcxproj -> C:\Users\eliu0\OneDrive\Desktop\UCLA CS projects\CS 32\Project3\Part2\SuperPeachSisters\Debug\SuperPeachSisters.exe

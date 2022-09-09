@@ -78,10 +78,7 @@ int StudentWorld::init() {
     return GWSTATUS_CONTINUE_GAME;
 }
 
-int StudentWorld::move()
-{
-    // This code is here merely to allow the game to build, run, and terminate after you hit enter.
-    // Notice that the return value GWSTATUS_PLAYER_DIED will cause our framework to end the current level.
+int StudentWorld::move() {
     if (m_peach->isAlive())
         m_peach->doSomething();
     for (int i = 0; i < m_actors.size(); i++)
@@ -92,13 +89,13 @@ int StudentWorld::move()
                 playSound(SOUND_PLAYER_DIE);
                 return GWSTATUS_PLAYER_DIED;
             }
-            if (m_gameFinished) {
-                playSound(SOUND_GAME_OVER);
-                return GWSTATUS_PLAYER_WON;
-            }
             if (m_levelFinished) {
                 playSound(SOUND_FINISHED_LEVEL);
                 return GWSTATUS_FINISHED_LEVEL;
+            }
+            if (m_gameFinished) {
+                playSound(SOUND_GAME_OVER);
+                return GWSTATUS_PLAYER_WON;
             }
         }
     for (int i = 0; i < m_actors.size(); i++)
@@ -131,7 +128,7 @@ void StudentWorld::cleanUp() {
 }
 
 bool StudentWorld::collideWall(double x, double y, bool bonk) {
-    for (int i = 0; i < m_actors.size(); i++) // Change to i = 1 later - flag/mario will become m_actors[0]
+    for (int i = 0; i < m_actors.size(); i++) 
         if (m_actors[i]->doesBlock() && (x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY())) {
             if (bonk)
                 m_actors[i]->bonk();
@@ -157,20 +154,22 @@ bool StudentWorld::isCloseToPeach(double x, int& dir) const {
 }
 
 bool StudentWorld::isOverlap(double x, double y, bool bonk) {
+    bool didOverlap = false;
     for (int i = 0; i < m_actors.size(); i++) 
-        if ((x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY()))
+        if ((x - 7 <= m_actors[i]->getX() && x + 7 >= m_actors[i]->getX()) && (y - 7 <= m_actors[i]->getY() && y + 7 >= m_actors[i]->getY())) {
             if (bonk) {
                 m_actors[i]->bonk();
-                return true;
+                didOverlap = true;
             } else if (m_actors[i]->isDamageable() && m_actors[i]->isAlive()) {
                 m_actors[i]->kill();
                 return true;
             }
-    return false;
+        }
+    return didOverlap;
 }
 
 void StudentWorld::newPowerUp(int powerUp, int startX, int startY) {
-    switch (powerUp) { // Are we allowed to identify different power ups like this?
+    switch (powerUp) { 
     case FLOWER:
         m_actors.push_back(new Flower(startX, startY, this));
         break;
